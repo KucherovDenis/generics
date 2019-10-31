@@ -70,18 +70,6 @@ import java.util.function.Predicate;
 
 public class Solution {
 
-    public static PhoneCode getCode(Person person, List<PhoneCode> phoneCodesList) {
-        PhoneCode result = null;
-        for (PhoneCode code : phoneCodesList) {
-            if (person.getPhoneNumber().contains(code.getCode())) {
-                result = code;
-                break;
-            }
-        }
-
-        return result;
-    }
-
     public static Result analyze(List<Person> persons, List<PhoneCode> phoneCodesList) {
         Collection<CatalogEntry> catalog = Utils.transform(persons, new Function<Person, CatalogEntry>() {
             @Override
