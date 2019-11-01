@@ -48,11 +48,11 @@ public class CountMapImpl<T> implements CountMap<T> {
     private void addAll(Map<T, Integer> source, Map<T, Integer> destionation) {
         for (T key : source.keySet()) {
             Integer value = destionation.get(key);
+            Integer srcValue = source.get(key);
             if (value == null) {
-                Integer srcValue = source.get(key);
                 destionation.put(key, srcValue);
             } else {
-                int newValue = value + source.get(key);
+                int newValue = value + srcValue;
                 destionation.put(key, newValue);
             }
         }
@@ -66,7 +66,7 @@ public class CountMapImpl<T> implements CountMap<T> {
     }
 
     @Override
-    public Map toMap() {
+    public Map<T, Integer> toMap() {
         Map<T, Integer> result = new HashMap<>();
         for (Map.Entry<T, Integer> entry : map.entrySet())
             result.put(entry.getKey(), entry.getValue());
@@ -74,8 +74,10 @@ public class CountMapImpl<T> implements CountMap<T> {
     }
 
     @Override
-    public void toMap(Map destination) {
+    public void toMap(Map<T, Integer> destination) {
         Objects.requireNonNull(destination);
+        if (map == destination) return;
+        destination.clear();
         addAll(map, destination);
     }
 }

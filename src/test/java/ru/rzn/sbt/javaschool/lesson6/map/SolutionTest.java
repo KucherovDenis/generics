@@ -84,7 +84,6 @@ public class SolutionTest {
         countMap2.add(5);
         countMap2.add(3);
 
-        resultMap.clear();
         countMap1.addAll(countMap2);
         countMap1.toMap(resultMap);
         assertEquals(resultMap.size(), 6);
